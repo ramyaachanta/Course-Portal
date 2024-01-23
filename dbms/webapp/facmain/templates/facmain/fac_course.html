@@ -1,0 +1,175 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+                <div class="text-right">
+                <button class="btn btn-info"><i class="fa fa-plus-square fa-o"></i> 
+                <a href ="{% url 'facupload' %}"> 
+                        <!---->Add Materials </a>
+                        </i></button>
+                    </div>
+                <div class="text-right">
+                <button class="btn btn-info"><i class="fa fa-plus-square fa-o"></i> 
+                <a href ="{% url 'ans' %}"> 
+                        View Submissions of Assignments </a>
+                        </i></button>
+                    </div>
+    <br />
+    <br />
+     
+    <div class="panel-group" id="accordion">
+        <div class="faqHeader">DBMS</div>
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseOne">Chapter 1</a>
+                </h4>
+            </div>
+            {% for m in materials %}
+            <div id="collapseOne" class="panel-collapse collapse in">
+                <div class="panel-body">
+                    <a href={{m.lec_pdf.url}}>
+                    {{m.lec_title}}
+                    </a>
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                {% endfor %}
+                <!--
+                <div class="panel-body">
+                    Database basics 
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Database basics 
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Relational Model 
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Relational Algebra1
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    Relational Algebra2
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">ER Model session
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">Enhanced ER diagram
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+            -->
+            </div>
+        </div>
+        <!--<div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTen">Chapter 2</a>
+                </h4>
+            </div>
+            <div id="collapseTen" class="panel-collapse collapse">
+                <div class="panel-body">
+                    Introduction to SQL
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    SQL Functions
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    SQL SET operation and Join
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    SQL SET operation and Join
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+                <div class="panel-body">
+                    SQL View Index Sequence constraints
+                    <div class="text-right"> 
+                        <button class="btn"><i class="fa fa-trash fa-lg"></i></button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseEleven">Chapter 3</a>
+                </h4>
+            </div>
+        </div>
+
+        <div class="panel panel-default">
+            <div class="panel-heading">
+                <h4 class="panel-title">
+                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-parent="#accordion" href="#collapseTwo">Chapter 4</a>
+                </h4>
+            </div>
+        </div>
+
+    </div>
+</div>
+-->
+<style>
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
+
+    .panel-heading [data-toggle="collapse"]:after {
+        font-family: 'Glyphicons Halflings';
+        content: "e072"; /* "play" icon */
+        float: right;
+        color: #F58723;
+        font-size: 18px;
+        line-height: 22px;
+        /* rotate "play" icon from > (right arrow) to down arrow */
+        -webkit-transform: rotate(-90deg);
+        -moz-transform: rotate(-90deg);
+        -ms-transform: rotate(-90deg);
+        -o-transform: rotate(-90deg);
+        transform: rotate(-90deg);
+    }
+
+    .panel-heading [data-toggle="collapse"].collapsed:after {
+        /* rotate "play" icon from > (right arrow) to ^ (up arrow) */
+        -webkit-transform: rotate(90deg);
+        -moz-transform: rotate(90deg);
+        -ms-transform: rotate(90deg);
+        -o-transform: rotate(90deg);
+        transform: rotate(90deg);
+        color: #454444;
+    }
+</style>
+  
+
+{% endblock %}

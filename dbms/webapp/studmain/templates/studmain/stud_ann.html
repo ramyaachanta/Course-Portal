@@ -1,0 +1,40 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+
+ <div class="container">
+    <h1>Announcements</h1>
+    <hr>
+  <div class="row">
+  <div class="form-group">
+    <div class="col-md-9 personal-info">
+    <ul>
+      {% for message in Announcements %}
+     
+      <li style="color:black;">{{message.title}}-{{message.description}}</li>
+     {% endfor %}
+      <!--
+      <li>Online End Semester Examinations Schedule for Ph.D Courses  August -2020 <strong>More » </strong></li>
+      <li>Elective Change / Course Cancellation-2020 <strong>More » </strong></li>
+      <li>Instructions for online Tuition Fee payment for AY 2020-2021 - Amrita School of Engineering <strong>More » </strong></li>
+      <li>Notification from Dean – Engg. regarding commencement of classes for the Odd Semester 2020-2021 and Tuition Fee Payment for AY 2020-2021 <strong>More » </strong></li>
+      <li>JRF position for the project "Development of Braze Joint between Carbon-Carbon (C-C) composites and Titanium Alloy Ti6Al4V" sponsored by ISRO-RESPOND, department of space. <strong>More » </strong></li>
+      <li>Amritotsavam 2020 <strong>More » </strong></li>
+      <li>The Department of Electronics and Eommunication Engineering and Amrita Center for Research and Development, will organize a Workshop on "CREATIVE THINKING AND USER CENTRED DESIGN" from May 15 - 16th <strong>More » </strong></li>
+      <li>The Department of Mathematics, Amrita School of Engineering, Ettimadai, Coimbatore is Workshop on Interconnection Networks from April 24-28, 2020. The conference will provide a platform to study basic Interconnection networking <strong>More » </strong></li>
+      <li>Graduation Day - 2020 ceremony for the Ettimadai campus on August 26, 2017 starting at 10.30 AM. The event will include conferring PhD, PG and UG degrees of all programs offered in the Ettimadai campus. <strong>More » </strong></li>
+      <li> Supplementary Exams Registration (2020 - 2121) <strong>More » </strong></li>
+      <li>Date of Class Commencement for the Academic Year 2020-2021 <strong>More » </strong></li>
+      -->
+
+    </ul>
+         
+           
+    </div>
+  </div>
+  </div>
+</div>
+
+ 
+  
+{% endblock %}

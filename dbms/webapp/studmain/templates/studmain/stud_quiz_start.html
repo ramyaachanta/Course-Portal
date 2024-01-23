@@ -1,0 +1,25 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+ <style>
+ .center {
+  margin: auto;
+  width: 80%;
+  border: 3px solid #6d7fcc;
+  padding: 30px;
+}
+</style>              
+<h3>Online Exam</h3>
+<div class = "center"  ><p><b>Please Read Carefully<br>Test Name : Toc_1<br>Duration : 20 minutes<br>Faculty Name : Dr. Jeyakumar <br>Marks : 20<br>Start Time : 3:15 PM <br> End Time : 3:45 PM<br></b>
+<button type="button" class="btn btn-primary" ><a href="{% url 'quizdone' %}">Start Test</a></button></p></div>
+
+
+  </div>
+</div>
+ </div>
+
+
+ 
+  
+{% endblock %}
+

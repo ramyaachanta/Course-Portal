@@ -1,0 +1,17 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+        
+
+<form action="/facsub/facassign/" class="post-form" method='post' enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+
+<input type="submit">
+
+
+
+</form> 
+
+
+{% endblock %}

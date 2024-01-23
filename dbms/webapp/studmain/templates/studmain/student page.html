@@ -1,0 +1,158 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+
+           
+  <h3> MY COURSES </h3>
+  <form class="form-inline">
+    <input class="form-control mr-sm-2" type="search" placeholder="Search"  id="myFilter" onkeyup="myFunction()" aria-label="Search">
+    
+  </form>
+
+    <div class="row"  style="padding-top:13px;">
+    {% for d in Course %}
+      <div class="col-lg-3 col-sm-5" >
+        <div class="thumbnail">
+  <div class="card" style="width: 20rem;">
+        
+  <img src="{{d.course_img.url}}"  height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">{{d.course_name}} <b></h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+    <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      
+      {% endfor %}
+      </div>
+      </div>
+      <!--
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+           <div class="card" style="width: 20rem;">
+  <img src="{% static 'course3.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">Maths</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+    <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+           <div class="card" style="width: 20rem;">
+  <img src="{% static 'course4.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">Environmental Studies</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+   <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+          <div class="card" style="width: 18rem;">
+   <div class="card" style="width: 20rem;">
+  <img src="{% static 'course5.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">Database Management System</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+   <a href ="{% url 'studgocourse' %}" class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+    </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+           <div class="card" style="width: 20rem;">
+  <img src="{% static 'course6.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">General Knowledge</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+    <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+           <div class="card" style="width: 20rem;">
+  <img src="{% static 'course7.jpeg' %}"  height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">Computer Oragnisations and Architecture</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+   <a href ="{% url 'studgocourse' %}" class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+           <div class="card" style="width: 20rem;">
+  <img src="{% static 'course8.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">CObject Oriented Programming</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+   <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+          <div class="card" style="width: 20rem;">
+  <img src="{% static 'course9.jpeg' %}" height=180px; class="card-img-top" alt="..." style="width:250px;">
+  <div class="card-body">
+    <center><h5 class="card-title">C Language</h5></center>
+    <p class="card-text">Teacher:</p>
+  </div>
+  <div class="card-body">
+    <a href ="{% url 'studgocourse' %}"  class="card-link">Go Course</a>
+  </div>
+</div>
+        </div>
+      </div>
+      -->
+      <script>
+function myFunction() {
+    var input, filter, cards, cardContainer, h5, title, i;
+    input = document.getElementById("myFilter");
+    filter = input.value.toUpperCase();
+    cardContainer = document.getElementById("myItems");
+    cards = cardContainer.getElementsByClassName("card");
+    for (i = 0; i < cards.length; i++) {
+        title = cards[i].querySelector(".card-body h5.card-body");
+        if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+            cards[i].style.display = "";
+        } else {
+            cards[i].style.display = "none";
+        }
+    }
+}
+</script>
+  </div>
+</div>
+ </div>
+   
+ 
+{% endblock %}
+

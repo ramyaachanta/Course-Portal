@@ -1,0 +1,30 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+
+
+   
+
+
+
+
+<form action="/facsub/facupload/" class="post-form" method='post' enctype="multipart/form-data">
+{% csrf_token %}
+{{ form.as_p }}
+
+<input type="submit">
+
+{% comment %} 
+<label for="appt">Choose a Due Date </label>
+<input type="date"  name="dat"  required>
+
+<label for="appt">Choose a end time:</label>
+<input type="time"  name="appt" min="09:00" max="18:00" required>
+<input type="submit">  {% endcomment %}
+
+
+
+</form> 
+
+
+{% endblock %}

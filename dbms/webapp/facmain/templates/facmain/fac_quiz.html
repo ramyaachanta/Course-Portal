@@ -1,0 +1,149 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+
+<form action="posting/" method="post">
+{% csrf_token %}
+<label>Link:</label>
+<input type="text" >
+<input type="submit">
+</form>
+<!--
+<h5 style="font-size:25px"><b>Create A Test</b></h5>
+<br>
+            <div class="har">
+<div><form name="myForm" action="/action_page.php" onsubmit="return validateForm()" method="post">
+  Test Title : <input type="text" name="fname">
+  <input type="submit" value="Submit">
+</form>
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+<div><form name="myForm" action="/action_page.php" onsubmit="return validateMark()" method="post">
+  Total marks: <input type="number" name="mark">
+  <input type="submit" value="Submit">
+</form>
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+<div><form name="myForm" action="/action_page.php" onsubmit="return validateMark()" method="post">
+  Total Questions: <input type="number" name="mark">
+  <input type="submit" value="Submit">
+</form>
+</div>
+</div>
+<br>
+<br>
+&nbsp;
+
+<div class="har2">
+<div class="har1">
+	 Test Date
+<label for="start"></label>
+
+<input type="date" id="start" name="trip-start"
+       value="2018-07-22"
+       min="2018-01-01" max="2018-12-31">
+</div>
+&nbsp;
+&nbsp;
+&nbsp;
+<form action="/action_page.php">
+ 
+ <label for="appt" style="font-size:15px" > Test Duration:</label>
+  <input type="time" id="appt" name="appt">
+  <input type="submit">
+</form>
+</div>
+
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+
+<form action="/action_page.php">
+  <label for="fname"  style="font-size:15px" ><b>Enter Your Qestion: </b></label>
+  <input type="text" id="fname" name="fname" style="width: 50%" ><br><br>
+</form>
+
+  <label for="fname"  style="font-size:15px" ><b>Enter Options Below:</b></label>
+
+
+  
+
+
+
+<div class="har3">
+ 
+      <div id="container">
+        <form>
+            <label for="name"  style="font-size:15px">Options:</label>
+            <input type="text" id="name" placeholder="Enter The Option" autocomplete="off">
+
+            <button id="btnAdd" style="font-size:15px">Add</button>
+
+            <label for="list">Options List:</label>
+            <select id="list" name="list" multiple>
+<br>
+            </select>
+            <button id="btnRemove" style="font-size:15px">Remove Selected Option</button>
+        </form>
+    </div>-->
+    <script>
+        const btnAdd = document.querySelector('#btnAdd');
+        const btnRemove = document.querySelector('#btnRemove');
+        const sb = document.querySelector('#list');
+        const name = document.querySelector('#name');
+
+        btnAdd.onclick = (e) => {
+            e.preventDefault();
+
+            // validate the option
+            if (name.value == '') {
+                alert('Please enter the name.');
+                return;
+            }
+            // create a new option
+            const option = new Option(name.value, name.value);
+            // add it to the list
+            sb.add(option, undefined);
+
+            // reset the value of the input
+            name.value = '';
+            name.focus();
+        };
+
+        // remove selected option
+        btnRemove.onclick = (e) => {
+            e.preventDefault();
+
+            // save the selected option
+            let selected = [];
+
+            for (let i = 0; i < sb.options.length; i++) {
+                selected[i] = sb.options[i].selected;
+            }
+
+            // remove all selected option
+            let index = sb.options.length;
+            while (index--) {
+                if (selected[index]) {
+                    sb.remove(index);
+                }
+            }
+        };
+    </script>
+
+
+
+{% endblock %}
+

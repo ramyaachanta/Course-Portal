@@ -1,0 +1,146 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+            <div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="{% static 'student.jpg' %}" width="200px" class="avatar img-circle" alt="avatar">
+          <!--
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+          -->
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          <strong>Faculty  details are below.</strong>
+        </div>
+        <h3>Personal info</h3>
+        <!-- fac_id=models.CharField(max_length=100,primary_key = True)
+    fac_pwd=models.CharField(max_length=100)
+    fac_name=models.CharField(max_length=100)
+    fac_email=models.CharField(max_length=100)
+    fac_mobile=models.IntegerField()
+    # ​fac_gender=models.CharField(max_length=100)
+    def __str__(self):
+        return self.fac_id-->
+        <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-lg-3 control-label">First name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value={{details.fac_name}}>
+            </div>
+          </div>
+          
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{details.fac_email}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="{{details.fac_id}}">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Department:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" value="CSE">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Mobile:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{details.fac_mobile}}">
+            </div>
+            <div class="form-group" >
+            <label class="col-lg-3 control-label" >Gender</label>
+            <div class="col-lg-8" >
+              <label class="radio-inline">
+              <input  name="gender" type="radio" >female</label>
+              <label class="radio-inline">
+              <input  name="gender" type="radio" checked>male</label>
+            </div>
+          </div>
+          <!--
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+
+              <input type="button" class="btn btn-primary" value="Save Changes">
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+          -->
+        </form>
+      </div>
+  </div>
+</div>
+<hr>       
+<!--
+ <div class="container">
+    <h1>Password</h1>
+    <hr>
+  <div class="row">
+<div class="form-group">
+   <div class="col-md-9 personal-info">
+        <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          <strong>Change the password if required.</strong>
+        </div>
+        <h3>Password</h3>
+         <form class="form-horizontal" role="form">
+          <div class="form-group">
+            <label class="col-md-3 control-label">Old Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="{{details.fac_pwd}}">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">New Password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-md-3 control-label">Confirm password:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="password" value="11111122333">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+
+              <input type="button" class="btn btn-primary" value="Save Changes">
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+      -->     
+ </div>
+   
+  
+
+{% endblock %}
