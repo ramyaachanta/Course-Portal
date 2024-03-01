@@ -1,11 +1,9 @@
-from django.conf.urls import url
 from django.urls import reverse
 from django.urls import path
 from . import views
 
 urlpatterns = [
     path('submitted/', views.submitted,name='submitted'),
-
     path('', views.studmain,name='studmain'),
     path('studprofile/',views.studprofile,name='studprofile'),
     path('studtest/',views.studtest,name='studtest'),
@@ -16,7 +14,7 @@ urlpatterns = [
     path('studfeed/',views.studfeed,name='studfeed'),
     path('studmodule/',views.studmodule,name='studmodule'),
     path('studassignsub/',views.studassignsub,name='studassignsub'),
-   path('studpro/',views.studpro,name='studpro'),
+    path('studpro/',views.studpro,name='studpro'),
     path('studgrade/',views.studgrade,name='studgrade'),
     path('studreg/',views.studreg,name='studreg'),
     path('quizdone/',views.quizdone,name='quizdone'),
