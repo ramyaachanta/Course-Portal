@@ -291,10 +291,11 @@ a.article:hover {
 
   <div class="wrapper"> 
         <!-- Sidebar  -->
-         <nav id="sidebar">
-            <div class="sidebar-header">
+         <nav id="sidebar" class="active" style="margin-bottom: 0px;">
+            <div class="sidebar-header" id="sidebarCollapse" class="btn btn-info">
                 <h3>Welcome</h3>
                 <strong><i class="fas fa-users"></i></strong>
+               
             </div>
 
             <ul class="list-unstyled components">
@@ -307,10 +308,10 @@ a.article:hover {
                 </li>
 		<li>
 
-		<li>
+		<li style="width: 100%;">
                     <a href="{% url 'facannouncement' %}">
-                        <i class="fas fa-bell"></i>
-                        Announcements
+                        <i class="fas fa-bell text-break" ></i>
+                        Announce
                     </a>
                 </li>
 
@@ -335,15 +336,12 @@ a.article:hover {
         <!-- Page Content  -->
         <div id="content">
 
-            <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <nav class="navbar navbar-expand-lg navbar-light bg-light" style="margin-bottom: 0px;">
                 <div class="container-fluid">
 
-                    <button type="button" id="sidebarCollapse" class="btn btn-info">
-                        <i class="fas fa-align-left"></i>
-                        <span></span>
-                    </button>
+                   
                     <a class="navbar-brand" href="{% url 'facmain' %}">
-    <img src="{% static 'log2.jpg' %}" alt="logo" style="width:180px;">
+    <img src="{% static 'uhcl.png' %}" alt="logo" style="width:180px;">
   </a>
                     <!--<button class="btn btn-dark d-inline-block d-lg-none ml-auto" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <i class="fas fa-align-justify"></i>

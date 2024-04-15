@@ -8,12 +8,11 @@
   </form>
     <div class="row" style="padding-top:13px;">
     {% for d in Course %}
-      {% if d.course_name == "Database Management System" or d.course_name == "C Language" %}
-      <div class="col-lg-3 col-sm-5">
+      <div class="col-lg-3 col-sm-3">
         <div class="thumbnail">
-          <div class="card" style="width: 18rem;">
-   <div class="card" style="width: 20rem;">
-  <img src="{{d.course_img.url}}" height=180px; class="card-img-top" alt="..." style="width:235px;">
+          <div class="card" style="width: 100%">
+   <div class="card" style="width: 100%;">
+  <img src="{{d.course_img.url}}" height=180px; class="card-img-top" alt="..." style="width:100%;">
   <div class="card-body"> 
             <center><h5 class="card-title" style="color:green"> 
               {{d.course_name}} <b>
@@ -22,27 +21,23 @@
             
    </div> 
    <div class="card-footer text-center">    
-             <button class="btn btn-info btn-sm float-right" style="color:white"> 
+             <button class="btn btn-info btn-sm " style="color:white"> 
                 <a href ="{% url 'facgocourse' %}"> </i>Go To Course</a>
               </button> 
               
               
-              <button class="btn btn-danger btn-sm float-right"> 
-                <a href ="{% url 'factest' %}">Test </a>
+              <button class="btn btn-danger btn-sm "> 
+                <a href ="{% url 'factest' %}">  Test  </a>
               </button>  
-               
-             
+              <button class="btn btn-info btn-sm "> 
+                <a href ="{% url 'facassigning' %}">Assignments <i class="fa fa-file-text"></i></a>
+              </button> 
                 
               <!--<button class="btn btn-danger btn-sm float-right"
                       id="right" style="color:white"> 
                   Right Button 
               </button> -->
-              <div class="pull-right">
-              <button class="btn btn-info btn-sm float-right"> 
-                <a href ="{% url 'facassigning' %}"> <i class="fa fa-file-text"></i></a>
-              </button>  
-               
-             </div>
+              
     </div>
   <!--<div class="card-body">
     <center><h5 class="card-title">Database Management System</h5></center>
@@ -56,7 +51,6 @@
       </div>
 
     </div>
-    {% endif %}
     {% endfor %}
 <!--
       <div class="col-lg-3 col-sm-5">
