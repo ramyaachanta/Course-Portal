@@ -1,0 +1,34 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<title>AmritaVidhya</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" type="text/css" href="{% static '1.css' %}">
+
+<head>
+	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+</head>
+
+
+
+<center id="image">
+	<img src="{% static 'uhcl.svg' %}"
+	style="width:35%">
+</center>
+
+	<center id ="access">
+  		<a href="{% url 'login' %}?name=login&type=faculty"><button class="my-button" title="Relevant Title" type="button"  ><b>Faculty</button></a>
+  		<a href="{% url 'login' %}?name=login&type=student"><button  class="my-button" title="Relevant Title"  type="button"  ><b>Student</button></a>
+  	</center>
+
+
+<div class="video-container" >
+<video autoplay="" style="width: inherit;"   id="video-bg" loop="true" muted="true" onloadedmetadata="this.muted = true" poster=""><source id="mp4" src="{% static 'uhcl.mp4' %}" type="video/mp4"><source id="ogg" src="" type="video/ogg"></video>
+</div>
+
+
+
+
+</html>

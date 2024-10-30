@@ -1,0 +1,113 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+    <div class="container">
+    <h1>Edit Profile</h1>
+    <hr>
+  <div class="row">
+      <!-- left column -->
+      <div class="col-md-3">
+        <div class="text-center">
+          <img src="{% static 'student.jpg' %}" width="200px" class="avatar img-circle" alt="avatar">
+          <!--
+          <h6>Upload a different photo...</h6>
+          
+          <input type="file" class="form-control">
+          -->
+        </div>
+      </div>
+      
+      <!-- edit form column -->
+      <div class="col-md-9 personal-info">
+        <!-- <div class="alert alert-info alert-dismissable">
+          <a class="panel-close close" data-dismiss="alert">×</a> 
+          <i class="fa fa-coffee"></i>
+          <strong>Details of Student</strong>
+        </div> -->
+        <h3>Personal info</h3>
+        
+        <form class="form-horizontal" role="form" action="/studDoProfile/" method="post">
+          {% csrf_token %}
+
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Name:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{details.name}}" name="name">
+            </div>
+          </div>
+          
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Email:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value={{details.email}} name="email">
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="col-md-3 control-label">Username:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" readonly value="{{details.reg_no}}" name="reg_no">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label class="col-md-3 control-label">Department:</label>
+            <div class="col-md-8">
+              <input class="form-control" type="text" readonly value="{{details.department}}" name="department" >
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-lg-3 control-label">Mobile:</label>
+            <div class="col-lg-8">
+              <input class="form-control" type="text" value="{{details.mobile}}" name="mobile">
+            </div>
+            <div class="form-group" >
+            <label class="col-lg-3 control-label" >Gender</label>
+            <div class="col-lg-8" >
+              <label class="radio-inline">
+                <input name="gender" type="radio" value="female" {% if details.gender == 'F' %} checked {% endif %}>female
+            </label>
+            <label class="radio-inline">
+                <input name="gender" type="radio" value="male" {% if details.gender == 'M' %} checked {% endif %}>male
+            </label>
+            
+            </div>
+          </div>
+          
+          <div class="form-group">
+            <label class="col-md-3 control-label"></label>
+            <div class="col-md-8">
+
+              <input type="submit" class="btn btn-primary" value="Save Changes" >
+              <span></span>
+              <input type="reset" class="btn btn-default" value="Cancel">
+            </div>
+          </div>
+
+          {% if messages %}
+          {% for message in messages %}
+            <div id="alert" class="alert alert-success" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+         
+        </form>
+      </div>
+  </div>
+</div>
+<hr>       
+<script>
+  setTimeout(function() {
+        var alert = document.getElementById('alert');
+        alert.style.transition = 'opacity 0.5s';
+        alert.style.opacity = '0';
+        setTimeout(function() {
+          alert.style.display = 'none';
+        }, 500); // Wait for the transition to complete before hiding the element
+      }, 2000); 
+</script>
+
+ 
+{% endblock %}

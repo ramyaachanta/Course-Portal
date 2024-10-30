@@ -1,0 +1,28 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+
+<form action="/facupload/" class="post-form" method='post' enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-group">
+        <label for="title">Title:</label>
+        <input type="text" id="title" name="material_title" class="form-control" required>
+    </div>
+    <input type="hidden" name="course_id" value="{{ request.GET.course_id }}">
+    <div class="form-group">
+        <label for="description">Description:</label>
+        <textarea id="description" name="description" class="form-control" required></textarea>
+    </div>
+
+    <div class="form-group">
+        <label for="file">File:</label>
+        <input type="file" id="file" name="material_file" class="form-control-file" required>
+    </div>
+
+    <div class="form-group">
+        <input type="submit" value="Upload" class="btn btn-primary">
+    </div>
+</form>
+
+{% endblock %}

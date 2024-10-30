@@ -1,0 +1,53 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<div >
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+                <h4 class="panel-title faqHeader">
+                    FAQ
+                </h4>
+            </div>
+            
+            
+            {% for m in faq %}
+
+            <div class="panel-body">
+                <div class="material-item">
+                    <p style="margin-top: 1%;">
+                        <a data-toggle="collapse" href="#collapse{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}" class="float-left">
+                            {{ m.faq_qsn }}
+                        </a>
+                        <button type="button" class="btn btn-sm btn-secondary pull-right float-right" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}">
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapse{{ forloop.counter }}">
+                        <div class="card card-body">
+                            
+                                {{ m.faq_ans }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+          
+        </div>
+    </div>
+</div>
+
+
+
+  
+
+<style>
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
+
+  
+</style>
+
+{% endblock %}

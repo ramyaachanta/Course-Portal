@@ -1,0 +1,17 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+
+
+   
+
+
+
+<center><h1>"The assignment details  has been submitted to students"</h1>
+<button type="button" class="btn btn-info">
+    <a  href="{% url 'facsub' %}?course_id={{ course_id }}">
+    Back</a>                        
+</button>
+</center>
+
+{% endblock %}

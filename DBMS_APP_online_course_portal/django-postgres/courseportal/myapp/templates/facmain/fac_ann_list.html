@@ -1,0 +1,40 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div style="display: flex; justify-content: space-between; align-items: center;">
+
+        <h2 >Announcements List</h2>
+        <a href="{% url 'facannouncement' %}?course_id={{ course_id }}" class="btn btn-primary pull-right">Create Announcement</a>
+
+    </div>
+    <div class="table-responsive">
+        {% if announcements %}
+
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Publish Date</th>
+                    <th>Description</th>
+                </tr>
+            </thead>
+            <tbody>
+                    {% for announcement in announcements %}
+                        <tr>
+                            <td>{{ announcement.notice_id.title }}</td>
+                            <td>{{ announcement.notice_id.publish_date }}</td>
+                            <td>{{ announcement.notice_id.description }}</td>
+                        </tr>
+                    {% endfor %}
+                
+            </tbody>
+        </table>
+        {% else %}
+                    <div>
+                        <div >No announcements available for this course.</td>
+                    </div>
+                {% endif %}
+    </div>
+</div>
+{% endblock %}

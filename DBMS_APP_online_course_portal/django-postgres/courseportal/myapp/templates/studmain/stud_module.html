@@ -1,0 +1,72 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<div >
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <div class="panel-heading" style="display: flex; justify-content: space-between; align-items: center;">
+                <h4 class="panel-title faqHeader">
+                    {{ course_details.course_name }}
+                </h4>
+                <div>
+                    <button class='btn btn-info' style="margin-left: 5px;">
+                        <a  href="{% url 'studassignment' %}?course_id={{ course_details.course_id }}&&fac_id={{course_details.fac_id}}">Assignments</a>
+                    </button> 
+                    <button class='btn btn-info' style="margin-left: 5px;">
+                        <a href="{% url 'studgradelist' %}?course_id={{ course_details.course_id }}&&fac_id={{course_details.fac_id}}">Grades</a>
+                    </button> 
+                    <button class='btn btn-danger' style="margin-left: 5px;">
+                        <a href="{% url 'studannouncement' %}?course_id={{ course_details.course_id }}&&fac_id={{course_details.fac_id}}">Announcement</a>
+                        <i class="fas fa-bell"></i>
+
+                    </button> 
+                    
+                </div>
+            </div>
+            
+            
+            {% if course_details.materials %}
+            {% for m in course_details.materials %}
+
+            <div class="panel-body">
+                <div class="material-item">
+                    <p style="margin-top: 1%;">
+                        <a data-toggle="collapse" href="#collapse{{ forloop.counter }}" role="button" aria-expanded="false" aria-controls="collapse{{ forloop.counter }}" class="float-left">
+                            {{ m.material_title }}
+                        </a>
+                        <button type="button" class="btn btn-sm btn-secondary pull-right float-right" data-toggle="collapse" data-target="#collapse{{ forloop.counter }}">
+                            <i class="bi bi-chevron-down"></i>
+                        </button>
+                    </p>
+                    <div class="collapse" id="collapse{{ forloop.counter }}">
+                        <div class="card card-body">
+                            <a href="{{ m.material_file.url }}">
+                                {{ m.material_title }}
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {% endfor %}
+            {% else %}
+            <!-- Materials list is empty, display a message or handle accordingly -->
+            <p style="text-align: center;">No materials available for this course.</p>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+
+
+  
+
+<style>
+    .faqHeader {
+        font-size: 27px;
+        margin: 20px;
+    }
+
+  
+</style>
+
+{% endblock %}

@@ -1,0 +1,41 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="text-center mx-auto">List of Assignments</h2>
+                <a href="{% url 'studgocourse' %}?course_id={{course.course_id}}&&fac_id={{fac_id}}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <ul class="list-group">
+                {% for assignment, marks in assignments %}
+                <li class="list-group-item">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5 class="mb-1">{{ assignment.title }}</h5>
+                            <p class="mb-1">Message: {{ assignment.message }}</p>
+                            {% if marks %}
+                            <p><strong>Marks Obtained: {{ marks }}</strong></p>
+                            {% endif %}
+                            <p class="mb-1">Total Marks: {{ assignment.total_marks }}</p>
+                        </div>
+                        <div class="col-md-6 d-flex justify-content-end">
+                            <div class="text-right">
+                                <p class="mb-1">Start Time: {{ assignment.start_time }}</p>
+                                <p class="mb-1">End Time: {{ assignment.end_time }}</p>
+                                <a href="{% url 'studassignsub' %}?course_id={{ course.course_id }}&fac_id={{ faculty_info }}&assign_id={{ assignment.assignment_id }}" class="btn btn-primary">Open Assignment</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+</div>
+{% endblock %}

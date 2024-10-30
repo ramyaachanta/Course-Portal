@@ -1,0 +1,40 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+
+<div class="container">
+  <div style="display: flex; justify-content: space-between; align-items: center;">
+
+      <h2>Announcements List</h2>
+      <a href="{% url 'studgocourse' %}?course_id={{ course_id }}&fac_id={{fac_id}}" class="btn btn-primary pull-right">Back</a>
+
+  </div>
+  <div class="table-responsive">
+      {% if announcements %}
+      <table class="table table-striped">
+          <thead>
+              <tr>
+                  <th>Title</th>
+                  <th>Publish Date</th>
+                  <th>Description</th>
+              </tr>
+          </thead>
+          <tbody>
+              {% for announcement in announcements %}
+              <tr>
+                  <td>{{ announcement.title }}</td>
+                  <td>{{ announcement.publish_date }}</td>
+                  <td>{{ announcement.description }}</td>
+              </tr>
+              {% endfor %}
+          </tbody>
+      </table>
+      {% else %}
+      <div>
+          <p>No announcements available for this course.</p>
+      </div>
+      {% endif %}
+  </div>
+</div>
+  
+{% endblock %}

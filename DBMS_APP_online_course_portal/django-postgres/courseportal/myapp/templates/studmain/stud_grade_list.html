@@ -1,0 +1,36 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <div style="display: flex; justify-content: space-between; align-items: center;">
+                <h2 class="text-center mx-auto">List of Assignments</h2>
+                <a href="{% url 'studgocourse' %}?course_id={{course.course_id}}&&fac_id={{fac_id}}" class="btn btn-primary">Back</a>
+            </div>
+        </div>
+    </div>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Title</th>
+                <th>Obtained Marks</th>
+                <th>Total Marks</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for assignment, marks in assignments %}
+            <tr>
+                <td>{{ assignment.title }}</td>
+                <td>{% if marks %}{{ marks }}{% else %}-{% endif %}</td>
+                <td>{{ assignment.total_marks }}</td>
+                <td>
+                    <a href="{% url 'studassignsub' %}?course_id={{ course.course_id }}&fac_id={{ faculty_info }}&assign_id={{ assignment.assignment_id }}" class="btn btn-primary">Go to Assignment</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}

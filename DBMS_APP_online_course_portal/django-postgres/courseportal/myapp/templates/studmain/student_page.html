@@ -1,0 +1,48 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<h3> MY COURSES </h3>
+<form class="form-inline ">
+  {% csrf_token %}
+  <input class="form-control w-full" type="search" placeholder="Search" id="myFilter" aria-label="Search" style="width: 100%; max-width: 360px;">
+</form>
+
+<div class="row" id="myItems" style="padding-top:13px;">
+    {% for d in Course %}
+    <div class="col-lg-3 col-sm-5">
+        <div class="thumbnail">
+            <div class="card">
+                <img src="{{d.course_img.url}}"  height=180px; class="card-img-top" alt="..." style="    width: -webkit-fill-available;
+                ">
+                 <div class="card-body">
+                    <center><h5 class="card-title">{{d.course_name}}</h5></center>
+                    <p class="card-text">Teacher: {{d.fac_name}}</p>
+                </div>
+                <div class="card-body">
+                    <a href="{% url 'studgocourse' %}?course_id={{d.course_id}}&&fac_id={{d.fac_id}}" class="card-link">Go Course</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endfor %}
+</div>
+
+<script>
+    document.getElementById("myFilter").addEventListener("keyup", function() {
+        var input, filter, cards, cardContainer, h5, title, i;
+        input = document.getElementById("myFilter");
+        filter = input.value.toUpperCase();
+        cardContainer = document.getElementById("myItems");
+        cards = cardContainer.getElementsByClassName("card");
+        for (i = 0; i < cards.length; i++) {
+            title = cards[i].querySelector(".card-body h5.card-title");
+            if (title.innerText.toUpperCase().indexOf(filter) > -1) {
+                cards[i].style.display = "";
+            } else {
+                cards[i].style.display = "none";
+            }
+        }
+    });
+</script>
+
+{% endblock %}

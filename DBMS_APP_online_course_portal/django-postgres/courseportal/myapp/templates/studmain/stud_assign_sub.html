@@ -1,0 +1,188 @@
+{% extends 'studmain/studbase.html' %}
+{% load static %}
+{% block content %}
+<div class="container" >
+    <div class="row">
+        <div class="col">
+            <div class="card-header d-flex justify-content-between align-items-center">
+                <h3 class="mb-0 text-center">{{ form.title }}</h3>
+                <a href="{% url 'studassignment' %}?course_id={{ course_id }}&&fac_id={{fac_id}}" class="btn btn-primary pull-right">Back</a>
+            </div>
+        </div>
+    </div>
+    
+        <div class="col-md-6">
+          
+            <div class="card mb-4">
+               
+                <div class="card-body">
+                    {% if marks %}
+                    <p><strong>Marks Obtained: {{ marks }}</strong></p>
+                    {% endif %}
+                    <p><strong>Total Marks:</strong> {{ form.total_marks }}</p>
+                    <p><strong>Start Time:</strong> {{ form.start_time }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card mb-4">
+                <div class="card-body">
+                    <p><strong>End Time:</strong> {{ form.end_time }}</p>
+                    <p><strong>Message:</strong> {{ form.message }}</p>
+                    <a href="{{ form.assignment_file_question.url }}" class="btn btn-outline-primary btn-sm mt-3" target="_blank">
+                        <i class="fas fa-download"></i> Download Assignment
+                    </a>
+                </div>
+            </div>
+        </div>
+    {% if latest_submission_id is None %}
+
+    <div class="row">
+        <div class="">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="mb-0">Submit Assignment</h4>
+                </div>
+                <div class="card-body">
+                    <form action="/studassignsub/" class="post-form" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+
+                        <div class="form-group">
+                            <label for="id_assignment_file">Assignment File:</label>
+                            <input type="file" class="form-control" id="assignment_file_answer" name="assignment_file_answer">
+                        </div>
+                        <div class="form-group">
+                            <label for="id_message">Message:</label>
+                            <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                        </div>
+                        <input type="hidden" name="assignment_id" value="{{ submit_form.initial.assignment }}">
+                        <input type="hidden" name="reg_no" value="{{ submit_form.initial.student }}">
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+ 
+    {% endif %}
+    {% if messages %}
+    {% for message in messages %}
+      <div id="alert" class="alert alert-success" role="alert">
+        {{ message }}
+      </div>
+    {% endfor %}
+  {% endif %}
+
+  {% if latest_submission_id %}
+  <div class="row ">
+      <div class="col offset-md-3">
+          <div class="card">
+              <div class="card-header">
+                  <h4 class="mb-0">Submitted Assignments</h4>
+              </div>
+              <div class="card-body">
+                  <select id="submissionDropdown" class="form-control" style="margin-bottom: 2%;">
+                      {% for submission in all_submission_ids %}
+                          <option value="{{ submission.submission_id }}" data-file-url="/courseportal/media/{{ submission.assignment_file_answer }}">{{ submission.submission_id }}</option>
+                      {% endfor %}
+                  </select>
+                  <div id="ptag"></div>
+
+                  <div id="fileViewer" class="mt-3"></div>
+              </div>
+          </div>
+      </div>
+  </div>
+  {% if marks is None%}
+
+  <div class="text-center">
+    <button id="resubmitButton" class="btn btn-primary">
+        <i class="fas fa-redo-alt"></i> Want to Resubmit?
+    </button>
+</div>
+{% endif %}
+<div id="resubmitFormContainer" class="row" style="display: none;">
+    <div class="">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="mb-0">Re-Submit Assignment</h4>
+            </div>
+            <div class="card-body">
+                <form id="resubmitForm" class="post-form" method="post" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label for="id_assignment_file">Assignment File:</label>
+                        <input type="file" class="form-control" id="assignment_file_answer" name="assignment_file_answer">
+                    </div>
+                    <div class="form-group">
+                        <label for="id_message">Message:</label>
+                        <textarea class="form-control" id="message" name="message" rows="4"></textarea>
+                    </div>
+                    <input type="hidden" name="assignment_id" value="{{ submit_form.initial.assignment }}">
+                    <input type="hidden" name="reg_no" value="{{ submit_form.initial.student }}">
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+{% endif %}
+</div>
+</div>
+<script>
+  document.addEventListener('click', function(event) {
+    if (event.target && event.target.id === 'resubmitButton') {
+        var formContainer = document.getElementById('resubmitFormContainer');
+        if (formContainer.style.display === 'block') {
+            formContainer.style.display = 'none';
+        } else {
+            formContainer.style.display = 'block';
+        }
+    }
+});
+
+  setTimeout(function() {
+        var alert = document.getElementById('alert');
+        alert.style.transition = 'opacity 0.5s';
+        alert.style.opacity = '0';
+        setTimeout(function() {
+          alert.style.display = 'none';
+        }, 500); // Wait for the transition to complete before hiding the element
+      }, 2000); 
+
+      function loadFile(fileUrl) {
+        var fileViewer = document.getElementById('fileViewer');
+        if (fileUrl.endsWith('.txt')) {
+            // For text files, load the content using AJAX and display it in a <pre> element
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    fileViewer.innerHTML = '<pre>' + this.responseText + '</pre>';
+                }
+            };
+            xhttp.open('GET', fileUrl, true);
+            xhttp.send();
+        } else {
+            // For other file types, load the file in an <iframe> element
+            fileViewer.innerHTML = `
+                <iframe src="${fileUrl}" width="100%" height="400px" frameborder="0"></iframe>
+            `;
+            ptag.innerHTML=`<p> please check your file has been downloaded or displayed below`;
+        }
+    }
+
+    // Event listener for the dropdown change
+    document.getElementById('submissionDropdown').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var fileUrl = selectedOption.getAttribute('data-file-url');
+        loadFile(fileUrl);
+    });
+
+    // Load default file for the latest submission
+    var defaultSubmissionId = '{{ latest_submission_id }}';
+    var defaultFileUrl = document.querySelector(`#submissionDropdown option[value="${defaultSubmissionId}"]`).getAttribute('data-file-url');
+    loadFile(defaultFileUrl);
+</script>
+{% endblock %}

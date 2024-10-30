@@ -1,0 +1,107 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+
+{% block content %}
+<div class="container">
+    <h1>ASSIGNMENTS</h1>
+
+    <div class="container">
+        <h2>Assignment Submissions</h2>
+        <form action="{% url 'submit_marks' %}" method="post">
+            {% csrf_token %}
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="submission_dropdown">Select Submission:</label>
+                        <select class="form-control" id="submission_dropdown" name="submission">
+                            {% for student_assignment in submission_data %}
+                                <option value="{{ student_assignment.submission_id }}" data-file-url="/courseportal/media/{{ student_assignment.assignment_file_answer }}">{{ student_assignment.submission_id }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="total_marks">Total Marks:</label>
+                        <p id="total_marks">{{ total_marks }}</p>
+                        <input type="hidden" name="total_marks" value="{{ total_marks }}">
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="form-group">
+                        <label for="marks_input">Enter Marks:</label>
+                        {% if marks %}
+                            <input type="number" class="form-control" id="marks_input" name="marks" value="{{ marks }}" required>
+                        {% else %}
+                            <input type="number" class="form-control" id="marks_input" name="marks" required>
+                        {% endif %}
+                    </div>
+                    
+                    <input type="hidden" name="assignment_id" value="{{ assignment_id }}">
+                    <input type="hidden" name="course_id" value="{{ course_id }}">
+                    <input type="hidden" name="student_id" value="{{ student_id }}">
+
+                    <button type="submit" class="btn btn-primary mt-3 mb-2">Submit Marks</button>
+                
+          {% if messages %}
+          {% for message in messages %}
+            <div id="alert" class="alert alert-success mt-2" role="alert">
+              {{ message }}
+            </div>
+          {% endfor %}
+        {% endif %}
+                </div>
+            </div>
+        
+            <div id="fileViewer"></div>
+        </form>
+    </div>
+</div>
+
+<script>
+    // Function to load file in iframe
+    function loadFile(fileUrl) {
+        var fileViewer = document.getElementById('fileViewer');
+        if (fileUrl.endsWith('.txt')) {
+            // For text files, load the content using AJAX and display it in a <pre> element
+            var xhttp = new XMLHttpRequest();
+            xhttp.onreadystatechange = function() {
+                if (this.readyState == 4 && this.status == 200) {
+                    fileViewer.innerHTML = '<pre>' + this.responseText + '</pre>';
+                }
+            };
+            xhttp.open('GET', fileUrl, true);
+            xhttp.send();
+        } else {
+            fileViewer.innerHTML = '<pre> <p>' + 'please check the file is being downloaded '+ '</pre>';
+
+            fileViewer.innerHTML = `
+                <iframe src="${fileUrl}" width="100%" height="400px" frameborder="0"></iframe>
+            `;
+        }
+    }
+
+    // Event listener for submission dropdown change
+    document.getElementById('submission_dropdown').addEventListener('change', function() {
+        var selectedOption = this.options[this.selectedIndex];
+        var fileUrl = selectedOption.getAttribute('data-file-url');
+        loadFile(fileUrl);
+    });
+
+    // Trigger change event for submission dropdown to load the first document by default
+    window.onload = function() {
+        var firstOption = document.getElementById('submission_dropdown').options[0];
+        if (firstOption) {
+            var fileUrl = firstOption.getAttribute('data-file-url');
+            loadFile(fileUrl);
+        }
+    };
+    setTimeout(function() {
+        var alert = document.getElementById('alert');
+        alert.style.transition = 'opacity 0.5s';
+        alert.style.opacity = '0';
+        setTimeout(function() {
+          alert.style.display = 'none';
+        }, 500); // Wait for the transition to complete before hiding the element
+      }, 2000); 
+</script>
+
+{% endblock %}

@@ -1,0 +1,66 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>UHCL</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'style.css' %}">
+    <link href="https://fonts.googleapis.com/css?family=Poppins:600&display=swap" rel="stylesheet">
+    <script src="https://kit.fontawesome.com/a81368914c.js"></script>
+    <meta name="viewport" content="width=device-width, initial-scale=1"> 
+
+</head>
+
+
+<body>
+    <nav class="navbar ">
+  <!-- Brand/logo -->
+  
+</nav>
+    <div class="container">
+        <div class="img">
+            {% if request.GET.type == 'student' %}
+            <img src="{% static '1.svg' %}">
+            {% endif %}
+            {% if request.GET.type == 'faculty' %}
+            <img src="{% static 'teach.svg' %}">
+            {% endif %}
+        </div>
+        <div class="login-content">
+            <form  action="/login/"  method="post">
+                {% csrf_token %}
+                <input type="hidden" name="type" value="{{ request.GET.type }}">
+                <a class="navbar-brand" href="https://www.uhcl.edu/">
+                    <img src="{% static 'uhcl.png' %}" alt="logo" style="width:275px;margin-left: 16px;">
+                  </a>
+                {% if request.GET.type == 'student' %}
+                <h2 class="title">Welcome Hawk Student</h2>
+                {% endif %}
+                {% if request.GET.type == 'faculty' %}
+                <h2 class="title">Welcome Hawk Faculty</h2>
+                {% endif %}
+                <div class="input-div one focus">
+                    <div class="i">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <div class="div">
+                        <input type="text" placeholder="Enter Username" class="input" name="username">
+                    </div>
+                </div>
+                 <div class="input-div pass">
+                    <div class="i">
+                        <i class="fas fa-lock"></i>
+                    </div>
+                    <div class="div">
+                        <input type="password" placeholder="Enter Password" class="input" name="password">
+                    </div>
+                </div>
+                 <a  href="{% url 'forgot_password' %}?name=forgot_password " >Forgot Password?</a>
+                <input type="submit" class="btn" value="Login">
+
+            </form>
+        </div>
+    </div>    
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+{% extends 'facmain/facbase.html' %}
+{% load static %}
+{% block content %}
+
+
+   
+
+
+
+<center><h1>"The given file has been uploaded"</h1>
+<button type="button" class="btn btn-info">
+<a  href="{% url 'facgocourse' %}?course_id={{Course.course_id}}">Back</a>
+                        
+</button>
+</center>
+
+{% endblock %}
