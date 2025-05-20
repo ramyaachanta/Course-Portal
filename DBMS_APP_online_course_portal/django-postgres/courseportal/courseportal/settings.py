@@ -135,3 +135,5 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/courseportal/media/'
+
+OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY")

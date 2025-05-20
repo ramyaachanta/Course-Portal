@@ -44,5 +44,8 @@ urlpatterns = [
     path('/assigndone',views.assigndone,name='assigndone'),
     path('/matdone',views.matdone,name='matdone'),
     path('/viewassignsub',views.viewassignsub,name='viewassignsub'),
-    path('/assignmentstudlist',views.assignmentstudlist,name='assignmentstudlist')
+    path('/assignmentstudlist',views.assignmentstudlist,name='assignmentstudlist'),
+    path("smartchat/", views.smart_chatbot, name="smart_chatbot"),
+
+
 ]

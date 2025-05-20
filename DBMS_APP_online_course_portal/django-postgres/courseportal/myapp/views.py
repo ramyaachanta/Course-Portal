@@ -4,8 +4,9 @@ from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, render, redirect
 from django.core.mail import send_mail
 from django.contrib import messages
-from django.urls import reverse  # Import the messages framework
+from django.urls import reverse  
 from django.db.models import Count
+from myapp.llm_agent import build_chatbot_for_course
 
 from myapp.forms import announcementform, assignmentform, assignsubform, materialsform
 from myapp.models import FAQ, Announcements, Assignment, AssignmentSubmission, Course, Enrollment, Faculty, FacultyAnnouncements, FacultyAssignment, FacultyDepartment, FacultyMaterial, FacultyMobile, Materials,Student, StudentAssignmentSubmission,StudentMobile,StudentDepartment
@@ -652,3 +653,21 @@ def posting(request):
     send_mail(subject,message,from_email,to_list,fail_silently=True)
     return render(request,'facmain/testdone.html')
     
+def smart_chatbot(request):
+    answer = ""
+    course_list = Course.objects.all()
+    selected_course = None
+
+    if request.method == "POST":
+        question = request.POST.get("question")
+        selected_course = request.POST.get("course_id")
+
+        if selected_course and question:
+            qa = build_chatbot_for_course(selected_course)
+            answer = qa.run(question)
+
+    return render(request, "chatbot/chatbot.html", {
+        "answer": answer,
+        "courses": course_list,
+        "selected": selected_course
+    })
